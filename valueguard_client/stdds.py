@@ -1,12 +1,13 @@
-import urllib.parse
-import json
 import requests
+from valueguard_client.helper import handle_response
 
-SERVER_URL="https://dataservice.valueguard.se"
+SERVER_URL = "https://dataservice.valueguard.se"
+
 
 def bostadsregistret(token, parameters):
+    """ Bostadsregistret
+
+    """
     url = 'https://dataservice.valueguard.se/stdds/bostadsregistret/download?access_token=' + token
-    response = requests.post(url, parameters)
-    if (response.status_code != 200):
-        raise Exception('Invalid response from server')
-    return response.content.decode("utf-8")
+    return handle_response(requests.post(url, parameters))
+
