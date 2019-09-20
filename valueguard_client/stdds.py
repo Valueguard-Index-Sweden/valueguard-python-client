@@ -6,8 +6,10 @@ SERVER_URL = "https://dataservice.valueguard.se"
 
 def bostadsregistret(token, parameters):
     """ Bostadsregistret
-
+    Anropet liknar referensprisanropet men hämtar informationen från bostadsregistret, ett nära nog
+    komplett register över alla bostäder i Sverige.
     """
-    url = 'https://dataservice.valueguard.se/stdds/bostadsregistret/download?access_token=' + token
+    url = SERVER_URL + '/stdds/bostadsregistret/download?access_token=' + token
+
     return handle_response(requests.post(url, parameters))
 

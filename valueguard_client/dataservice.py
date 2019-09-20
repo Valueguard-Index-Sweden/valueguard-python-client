@@ -27,7 +27,9 @@ def home_information(token, street_address, zip, format):
 
 def assessment(token, search_bean):
     """ Assessment
-
+    En värderingsalgoritm som är betydligt mer avancerad än den funktionalitet som finns i
+    referensprisanropet. Responstiden i snitt 5 sekunder för bostadsrätter och 12 sekunder för villor i
+    skarp drift.
     """
     url = server_url + "/dataService/rest/assessment?auth=" + token + "&sb=" + quote(
         json.dumps(search_bean))
@@ -49,14 +51,15 @@ def index_normalized(token, index_id, min_date, max_date, reference_date, refere
     """ IndexNormalized
 
     """
-    url = server_url + "/dataService/rest/indexNormalized?auth=" + str(token) + "&indexId=" + str(index_id) + "&minDate=" + str(min_date) + "&maxDate=" + str(min_date) + "&referenceDate=" + str(reference_date) + "&referenceValue=" + str(reference_value)
+    url = server_url + "/dataService/rest/indexNormalized?auth=" + str(token) + "&indexId=" + str(index_id) + "&minDate=" + str(min_date) + "&maxDate=" + str(max_date) + "&referenceDate=" + str(reference_date) + "&referenceValue=" + str(reference_value)
     # print(url)
     return handle_response(get(url))
 
 
 def brf(token, search_bean):
     """ Brf
-
+    Funktioner för att med en adress hitta en bostadsrättsförening, alternativt lista vilka adresser som
+    hör till en bostadsrättsförening. Funktionen kan också returnera annan information som byggår-
     """
     url = server_url + "/dataService/rest/brf?auth=" + token + "&sb=" + quote(
         json.dumps(search_bean))
@@ -64,7 +67,7 @@ def brf(token, search_bean):
     return handle_response(get(url))
 
 
-def addresses_from_brf(token,search_bean):
+def addresses_from_brf(token, search_bean):
     """ AddressesFromBrf
 
     """
@@ -78,9 +81,8 @@ def office(token, wgs84_lat, wgs84_lon):
     """ Office
 
     """
-    url = server_url + "/dataService/rest/office?auth=" + str(token) + "&wgs84Lat=" + str(wgs84_lat) + \
-          "&wgs84Lon=" + str(wgs84_lon)
-    # print(url)
+    url = server_url + "/dataService/rest/office?auth=" + str(token) + "&wgs84Lat=" + str(wgs84_lat) + "&wgs84Lon=" + str(wgs84_lon)
+    print(url)
     return handle_response(get(url))
 
 
@@ -95,12 +97,12 @@ def area(token, lat, lon):
 
 def area_statistics(token, area_id, house_type, rooms_list, area_intervals, min_build_year, max_build_year, min_nr_in_category):
     """ AreaStatistics
-
+    Denna funktion finns, men kontakta oss innan den används :)
     """
-    url = server_url + "/dataService/rest/area?reaStatistics?auth=" + token + "&areaId=" + area_id + "&houseType=" + house_type + "&roomsList=" + \
-          rooms_list + "&areaIntervals=" + quote(area_intervals) + "&minBuildYear=" + min_build_year + "&maxBuildYear=" + max_build_year + \
-          "&minNrInCategory=" + min_nr_in_category
-    # print(url)
+    url = server_url + "/dataService/rest/area?reaStatistics?auth=" + token + "&areaId=" + str(area_id) + "&houseType=" + str(house_type) + "&roomsList=" + \
+          str(rooms_list) + "&areaIntervals=" + quote(area_intervals) + "&minBuildYear=" + str(min_build_year) + "&maxBuildYear=" + str(max_build_year) + \
+          "&minNrInCategory=" + str(min_nr_in_category)
+    print(url)
     return handle_response(get(url))
 
 
