@@ -280,6 +280,3 @@ ad_broker_statistics_data = dataservice.ad_broker_statistics(auth_service_token,
                                                              })
 print(ad_broker_statistics_data)
 '''
-
-
-“bostadsregistret”
