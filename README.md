@@ -1,3 +1,5 @@
+ <img src="https://valueguard.se/static/media/valueguardlogo_black.f3a4c174.png" width="200">
+ 
 # valueguard-python-client
 
 
