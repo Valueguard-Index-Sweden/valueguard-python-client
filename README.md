@@ -27,7 +27,7 @@
 
 Install by pip
 ```
-pip3 install @git.. TODO
+pip3 install git+https://github.com/Valueguard-Index-Sweden/valueguard-python-client#egg=valueguard
 ```
 
 # Usage
