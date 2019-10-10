@@ -55,7 +55,7 @@ vgClient.residential_registry(offset=0, limit=800, search_criteria={
 Bugs, questions, and other issues can be directed to the project's [issues page](https://github.com/Valueguard-Index-Sweden/valueguard-python-client/issues) on GitHub, or emailed to [info@valueguard.se](mailto:info@valueguard.se).
 
 ## Contributing
-Contributions are welcome in the form of code, bug fixes, or testing feedback. For more on how to contribute to Valueguard-python-client, see the [code of conduct](docs/CODE_OF_CONDUCT.md) and [contributing guielines](docs/CONTRIBUTING.md).
+Contributions are welcome in the form of code, bug fixes, or testing feedback. For more on how to contribute to Valueguard-python-client, see the [code of conduct](docs/CODE_OF_CONDUCT.md) and [contributing guidelines](docs/CONTRIBUTING.md).
 
 
 # Copyright
