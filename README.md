@@ -20,7 +20,7 @@
 
 **Valueguard Python Client** is the official client used to interact with the new **Valueguards API**
 
-- For **python client** documentation see [Usage](#usage) and [wiki-page](https://github.com/Valueguard-Index-Sweden/valueguard-python-client/wiki)
+- For **python client** documentation see [usage](#usage) and [wiki-page](https://github.com/Valueguard-Index-Sweden/valueguard-python-client/wiki)
 - For the **core Valueguard API** documentation, see the [api documentation](TODO).
 
 ## Installing
