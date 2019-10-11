@@ -7,7 +7,7 @@ class Client:
     # Static
     # server_url = "http://10.10.2.222:31212"
     server_url = "http://localhost:8080"
-    __oauth2_client_username = "api"
+    __oauth2_client_name = "api"
 
     # User settings;
     access_token = ""
@@ -18,11 +18,29 @@ class Client:
 
     # TODO url-encode username and password
     def authenticate(self, username, password):
-        url = self.server_url + "/oauth/token?client_id=" + self.__oauth2_client_username + "&grant_type=password" \
-                                                                                            "&username=" + username + \
-              "&password=" + password
+        """ Uses user's credentials to authenticate.
+
+        Generates the url to authenticate and request the access token as well
+        as the refresh token from the server.
+
+        Parameters
+        ----------
+        :param username:
+            Username used to authenticate
+        :param password:
+            Password used to authenticates
+
+        Raises
+        ------
+        :exception
+            Exception raised when the server response is invalid
+        """
+        url = self.server_url + "/oauth/token?client_id=" + self.__oauth2_client_name + "&grant_type=password" \
+                                                                                        "&username=" + username + \
+                                                                                        "&password=" + password
         # print(url)
         response = requests.post(url)
+
         if response.status_code == 200:
             response_json = json.loads(response.content.decode("utf-8"))
             self.access_token = response_json['access_token']
@@ -30,10 +48,13 @@ class Client:
             # print(response_json)
         elif response.status_code != 200:
             # print(response.status_code)
-            print(response.content.decode("utf-8"))
-            raise Exception('Invalid response from server')
+            # print(response.content.decode("utf-8"))
+            raise Exception(response.content.decode("utf-8"))
 
     def renew_access_token(self):
+        """ Handles the renewal of the access token.
+
+        """
         url = self.server_url + "/oauth/token?client_id=api&grant_type=refresh_token&refresh_token=" + self.refresh_token
         print(url)
         response = requests.post(url)
@@ -43,12 +64,30 @@ class Client:
             self.refresh_token = response_json['refresh_token']
             print(response_json)
         else:
-            print(response.content.decode("utf-8"))
+            # print(response.content.decode("utf-8"))
+            raise Exception(response.content.decode("utf-8"))
 
-    def residential_registry(self, offset, limit):
-        return self.residential_registry(offset, limit, {})
+    def residential_registry(self, offset, limit, search_criteria=None):
+        """ Handles the query to retrieve data from the residential registry.
 
-    def residential_registry(self, offset, limit, search_criteria):
+        Uses offset and limit to break down the results of the query into chunks.
+
+        Parameters
+        ----------
+        :param offset:
+            The offset to start retrieving data from.
+        :param limit:
+            Defines the amount of data objects retrieved with each query.
+        :param search_criteria:
+            Defines the search criteria used to filter the query.
+
+        Returns
+        -------
+        :return:
+            The query result in JSON format
+        """
+        if search_criteria is None:
+            search_criteria = {}
         url = self.server_url + "/v1/residential/registry?access_token=" + self.access_token + "&offset=" + str(
             offset) + "&limit=" + str(limit)
         for key, value in search_criteria.items():
@@ -56,8 +95,8 @@ class Client:
         # print(url)
         session = requests.Session()
         response = session.get(url)
-        if (response.status_code != 200):
-            print(response.content.decode("utf-8"))
-            raise Exception('Invalid response from server')
+        if response.status_code != 200:
+            # print(response.content.decode("utf-8"))
+            raise Exception(response.content.decode("utf-8"))
 
         return json.loads(response.content.decode("utf-8"))
