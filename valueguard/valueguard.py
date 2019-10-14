@@ -16,7 +16,6 @@ class Client:
     def __init__(self):
         pass
 
-    # TODO url-encode username and password
     def authenticate(self, username, password):
         """ Uses user's credentials to authenticate.
 
