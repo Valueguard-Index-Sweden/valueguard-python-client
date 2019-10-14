@@ -36,8 +36,10 @@ class Client:
             Exception raised when the server response is invalid
         """
         url = self.server_url + "/oauth/token?client_id=" + self.__oauth2_client_name + "&grant_type=password" \
-                                                                                        "&username=" + username + \
-                                                                                        "&password=" + password
+                                                                                        "&username=" + \
+                                                                                        urllib.parse.quote(username) + \
+                                                                                        "&password=" + \
+                                                                                        urllib.parse.quote(password)
         # print(url)
         response = requests.post(url)
 
@@ -55,7 +57,8 @@ class Client:
         """ Handles the renewal of the access token.
 
         """
-        url = self.server_url + "/oauth/token?client_id=api&grant_type=refresh_token&refresh_token=" + self.refresh_token
+        url = self.server_url + "/oauth/token?client_id=api&grant_type=refresh_token&refresh_token=" + \
+                                urllib.parse.quote(self.refresh_token)
         print(url)
         response = requests.post(url)
         if response.status_code == 200:
@@ -88,8 +91,11 @@ class Client:
         """
         if search_criteria is None:
             search_criteria = {}
-        url = self.server_url + "/v1/residential/registry?access_token=" + self.access_token + "&offset=" + str(
-            offset) + "&limit=" + str(limit)
+        url = self.server_url + "/v1/residential/registry?access_token=" + \
+                                urllib.parse.quote(self.access_token) + \
+                                "&offset=" + urllib.parse.quote(str(offset)) + \
+                                "&limit=" + urllib.parse.quote(str(limit))
+
         for key, value in search_criteria.items():
             url += "&" + urllib.parse.quote(key) + "=" + urllib.parse.quote(str(value))
         # print(url)
