@@ -5,8 +5,8 @@ import urllib.parse
 
 class Client:
     # Static
-    # server_url = "http://10.10.2.222:31212"
-    server_url = "http://localhost:8080"
+    # server_url = "http://localhost:8080"
+    server_url = "https://api.valueguard.se"
     __oauth2_client_name = "api"
 
     # User settings;
