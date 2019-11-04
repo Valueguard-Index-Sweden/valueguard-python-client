@@ -3,6 +3,13 @@ import json
 import urllib.parse
 
 
+def _generate_request_search_criteria(search_criteria):
+    url = ""
+    for key, value in search_criteria:
+        url += "&" + urllib.parse.quote(key) + "=" + urllib.parse.quote(str(value))
+    return url
+
+
 class Client:
     # Static
     # server_url = "http://localhost:8080"
@@ -36,9 +43,9 @@ class Client:
         """
         url = self.server_url + "/oauth/token?client_id=" + self.__oauth2_client_name + "&grant_type=password" \
                                                                                         "&username=" + \
-                                                                                        urllib.parse.quote(username) + \
-                                                                                        "&password=" + \
-                                                                                        urllib.parse.quote(password)
+              urllib.parse.quote(username) + \
+              "&password=" + \
+              urllib.parse.quote(password)
         # print(url)
         response = requests.post(url)
 
@@ -57,7 +64,7 @@ class Client:
 
         """
         url = self.server_url + "/oauth/token?client_id=api&grant_type=refresh_token&refresh_token=" + \
-                                urllib.parse.quote(self.refresh_token)
+              urllib.parse.quote(self.refresh_token)
         print(url)
         response = requests.post(url)
         if response.status_code == 200:
@@ -94,14 +101,45 @@ class Client:
                                 urllib.parse.quote(self.access_token) + \
                                 "&offset=" + urllib.parse.quote(str(offset)) + \
                                 "&limit=" + urllib.parse.quote(str(limit))
-
-        for key, value in search_criteria.items():
-            url += "&" + urllib.parse.quote(key) + "=" + urllib.parse.quote(str(value))
+        url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
         response = session.get(url)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
+        return json.loads(response.content.decode("utf-8"))
 
+    def residential_registry_markups(self, offset, limit, search_criteria=None):
+        """ Handles the query to retrieve data from the residential registry markups.
+
+        Uses offset and limit to break down the results of the query into chunks.
+
+        Parameters
+        ----------
+        :param offset:
+            The offset to start retrieving data from.
+        :param limit:
+            Defines the amount of data objects retrieved with each query.
+        :param search_criteria:
+            Defines the search criteria used to filter the query.
+
+        Returns
+        -------
+        :return:
+            The query result in JSON format
+        """
+        if search_criteria is None:
+            search_criteria = {}
+        url = self.server_url + "/v1/residential/registry/markups?access_token=" + \
+              urllib.parse.quote(self.access_token) + \
+              "&offset=" + urllib.parse.quote(str(offset)) + \
+              "&limit=" + urllib.parse.quote(str(limit))
+        url += _generate_request_search_criteria(search_criteria.items())
+        # print(url)
+        session = requests.Session()
+        response = session.get(url)
+        if response.status_code != 200:
+            # print(response.content.decode("utf-8"))
+            raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
