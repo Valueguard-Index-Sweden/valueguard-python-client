@@ -42,7 +42,7 @@ vgClient = valueguard.Client()
 vgClient.authenticate(<username>,<password>)
 
 # Use wished function 
-vgClient.residential_registry(offset=0, limit=800, search_criteria={
+print(vgClient.residential_registry(offset=0, limit=800, search_criteria={
                                                             "construction_year_min": 2018,
                                                             "construction_year_max": 2019
                                                             }))
