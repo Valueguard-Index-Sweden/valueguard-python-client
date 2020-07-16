@@ -61,7 +61,7 @@ Contributions are welcome in the form of code, bug fixes, or testing feedback. F
 # Copyright
 MIT License
 
-Copyright (c) 2019 Valueguard (info@valueguard.se)
+Copyright (c) 2020 Valueguard (info@valueguard.se)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
