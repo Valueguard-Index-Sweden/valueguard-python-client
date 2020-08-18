@@ -178,7 +178,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
- def taxation_registry_units(self, offset, limit, search_criteria=None):
+    def taxation_registry_units(self, offset, limit, search_criteria=None):
         """ Handles the query to retrieve data from the taxation unit registry.
 
         Uses offset and limit to break down the results of the query into chunks.
@@ -212,7 +212,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
- def taxation_registry_buildings(self, offset, limit, search_criteria=None):
+    def taxation_registry_buildings(self, offset, limit, search_criteria=None):
          """ Handles the query to retrieve data from the taxation building registry.
 
          Uses offset and limit to break down the results of the query into chunks.
@@ -246,7 +246,7 @@ class Client:
              raise Exception(response.content.decode("utf-8"))
          return json.loads(response.content.decode("utf-8"))
 
-  def taxation_registry_lands(self, offset, limit, search_criteria=None):
+    def taxation_registry_lands(self, offset, limit, search_criteria=None):
           """ Handles the query to retrieve data from the taxation land registry.
 
           Uses offset and limit to break down the results of the query into chunks.
