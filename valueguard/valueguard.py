@@ -177,3 +177,105 @@ class Client:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
+
+    def taxation_registry_units(self, offset, limit, search_criteria=None):
+        """ Handles the query to retrieve data from the taxation unit registry.
+
+        Uses offset and limit to break down the results of the query into chunks.
+
+        Parameters
+        ----------
+        :param offset:
+            The offset to start retrieving data from.
+        :param limit:
+            Defines the amount of data objects retrieved with each query.
+        :param search_criteria:
+            Defines the search criteria used to filter the query.
+
+        Returns
+        -------
+        :return:
+            The query result in JSON format
+        """
+        if search_criteria is None:
+            search_criteria = {}
+        url = self.server_url + "/v1/taxation/registry/units?access_token=" + \
+              urllib.parse.quote(self.access_token) + \
+              "&offset=" + urllib.parse.quote(str(offset)) + \
+              "&limit=" + urllib.parse.quote(str(limit))
+        url += _generate_request_search_criteria(search_criteria.items())
+        # print(url)
+        session = requests.Session()
+        response = session.get(url)
+        if response.status_code != 200:
+            # print(response.content.decode("utf-8"))
+            raise Exception(response.content.decode("utf-8"))
+        return json.loads(response.content.decode("utf-8"))
+
+    def taxation_registry_buildings(self, offset, limit, search_criteria=None):
+         """ Handles the query to retrieve data from the taxation building registry.
+
+         Uses offset and limit to break down the results of the query into chunks.
+
+         Parameters
+         ----------
+         :param offset:
+             The offset to start retrieving data from.
+         :param limit:
+             Defines the amount of data objects retrieved with each query.
+         :param search_criteria:
+             Defines the search criteria used to filter the query.
+
+         Returns
+         -------
+         :return:
+             The query result in JSON format
+         """
+         if search_criteria is None:
+             search_criteria = {}
+         url = self.server_url + "/v1/taxation/registry/buildings?access_token=" + \
+               urllib.parse.quote(self.access_token) + \
+               "&offset=" + urllib.parse.quote(str(offset)) + \
+               "&limit=" + urllib.parse.quote(str(limit))
+         url += _generate_request_search_criteria(search_criteria.items())
+         # print(url)
+         session = requests.Session()
+         response = session.get(url)
+         if response.status_code != 200:
+             # print(response.content.decode("utf-8"))
+             raise Exception(response.content.decode("utf-8"))
+         return json.loads(response.content.decode("utf-8"))
+
+    def taxation_registry_lands(self, offset, limit, search_criteria=None):
+          """ Handles the query to retrieve data from the taxation land registry.
+
+          Uses offset and limit to break down the results of the query into chunks.
+
+          Parameters
+          ----------
+          :param offset:
+              The offset to start retrieving data from.
+          :param limit:
+              Defines the amount of data objects retrieved with each query.
+          :param search_criteria:
+              Defines the search criteria used to filter the query.
+
+          Returns
+          -------
+          :return:
+              The query result in JSON format
+          """
+          if search_criteria is None:
+              search_criteria = {}
+          url = self.server_url + "/v1/taxation/registry/lands?access_token=" + \
+                urllib.parse.quote(self.access_token) + \
+                "&offset=" + urllib.parse.quote(str(offset)) + \
+                "&limit=" + urllib.parse.quote(str(limit))
+          url += _generate_request_search_criteria(search_criteria.items())
+          # print(url)
+          session = requests.Session()
+          response = session.get(url)
+          if response.status_code != 200:
+              # print(response.content.decode("utf-8"))
+              raise Exception(response.content.decode("utf-8"))
+          return json.loads(response.content.decode("utf-8"))
