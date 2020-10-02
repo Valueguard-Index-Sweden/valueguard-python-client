@@ -1,2 +1,7 @@
 example*.py
 *~
+.idea/
+dist/
+valueguard.egg-info/
+valueguard/__pycache__/
+valueguard_client/
