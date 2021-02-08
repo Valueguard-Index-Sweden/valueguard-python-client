@@ -298,7 +298,7 @@ class Client:
         url = self.server_url + "/v1/valuation?access_token=" + \
               urllib.parse.quote(self.access_token)
         url += _generate_request_search_criteria(search_criteria.items())
-        print(url)
+        # print(url)
         session = requests.Session()
         response = session.get(url)
         if response.status_code != 200:
