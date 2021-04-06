@@ -306,8 +306,8 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
-    def sales_references(self, search_criteria=None):
-        """ Handles the query to get sales references.
+    def sales_reference(self, search_criteria=None):
+        """ Handles the query to get sales from reference.
 
         Parameters
         ----------
@@ -321,7 +321,7 @@ class Client:
         """
         if search_criteria is None:
             search_criteria = {}
-        url = self.server_url + "/v1/sales/references?access_token=" + \
+        url = self.server_url + "/v1/sales/reference?access_token=" + \
               urllib.parse.quote(self.access_token)
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
