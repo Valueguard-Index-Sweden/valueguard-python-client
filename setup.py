@@ -7,7 +7,7 @@ requirements = ["requests>=2"]
 
 setup(
     name="valueguard",
-    version="0.1.2",
+    version="0.1.3",
     author="Valueguard",
     author_email="info@valueguard.se",
     description="The official client for the Valueguard API",
