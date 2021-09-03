@@ -76,6 +76,33 @@ class Client:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
 
+
+    def user_roles(self):
+        """ Handles the query to get users roles.
+
+        Parameters
+        ----------
+        :param search_criteria:
+            Defines the search criteria used to filter the query.
+
+        Returns
+        -------
+        :return:
+            The query result in JSON format
+        """
+        if search_criteria is None:
+            search_criteria = {}
+        url = self.server_url + "/v0/users/me/roles?access_token=" + \
+              urllib.parse.quote(self.access_token)
+        # print(url)
+        session = requests.Session()
+        response = session.get(url)
+        if response.status_code != 200:
+            # print(response.content.decode("utf-8"))
+            raise Exception(response.content.decode("utf-8"))
+        return json.loads(response.content.decode("utf-8"))
+            
+            
     def residential_registry(self, offset, limit, search_criteria=None):
         """ Handles the query to retrieve data from the residential registry.
 
