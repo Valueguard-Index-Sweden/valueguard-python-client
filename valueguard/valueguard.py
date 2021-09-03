@@ -90,8 +90,6 @@ class Client:
         :return:
             The query result in JSON format
         """
-        if search_criteria is None:
-            search_criteria = {}
         url = self.server_url + "/v0/users/me/roles?access_token=" + \
               urllib.parse.quote(self.access_token)
         # print(url)
