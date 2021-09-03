@@ -95,7 +95,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
     
-        def user_roles(self):
+    def user_roles(self):
         """ Handles the query to get users roles.
 
         Returns
