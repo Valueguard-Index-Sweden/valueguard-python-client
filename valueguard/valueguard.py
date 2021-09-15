@@ -370,6 +370,33 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
+    def sales_reference(self, search_criteria=None):
+        """ Handles the query to get sales.
+
+        Parameters
+        ----------
+        :param search_criteria:
+            Defines the search criteria used to filter the query.
+
+        Returns
+        -------
+        :return:
+            The query result in JSON format
+        """
+        if search_criteria is None:
+            search_criteria = {}
+        url = self.server_url + "/v1/sales?access_token=" + \
+              urllib.parse.quote(self.access_token)
+        url += _generate_request_search_criteria(search_criteria.items())
+        # print(url)
+        session = requests.Session()
+        response = session.get(url)
+        if response.status_code != 200:
+            # print(response.content.decode("utf-8"))
+            raise Exception(response.content.decode("utf-8"))
+        return json.loads(response.content.decode("utf-8"))
+    
+    
     def index_normalized(self, search_criteria=None):
         """ Handles the query to get index normalized.
 
