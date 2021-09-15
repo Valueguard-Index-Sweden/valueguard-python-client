@@ -370,7 +370,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
-    def sales_reference(self, search_criteria=None):
+    def sales(self, search_criteria=None):
         """ Handles the query to get sales.
 
         Parameters
