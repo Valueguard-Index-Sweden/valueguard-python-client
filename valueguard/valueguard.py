@@ -437,7 +437,7 @@ class Client:
         """
         if search_criteria is None:
             search_criteria = {}
-        url = self.server_url + "/v1/ads_pdf?access_token=" + \
+        url = self.server_url + "/v1/ads/pdf?access_token=" + \
               urllib.parse.quote(self.access_token)
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
