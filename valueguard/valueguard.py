@@ -594,10 +594,10 @@ class Client:
             search_criteria = {}
             
         if public:
+            url = self.server_url + "/v1/index/statistics/public"
+        else: 
             url = self.server_url + "/v1/index/statistics?access_token=" + \
                 urllib.parse.quote(self.access_token)
-        else: 
-            url = self.server_url + "/v1/index/statistics/public"
             
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
