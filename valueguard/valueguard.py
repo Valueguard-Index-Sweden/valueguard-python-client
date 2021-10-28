@@ -594,7 +594,7 @@ class Client:
             search_criteria = {}
             
         if public:
-            url = self.server_url + "/v1/index/statistics/public"
+            url = self.server_url + "/v1/index/statistics/public?"
         else: 
             url = self.server_url + "/v1/index/statistics?access_token=" + \
                 urllib.parse.quote(self.access_token)
