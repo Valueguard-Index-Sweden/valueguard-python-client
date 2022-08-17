@@ -624,7 +624,7 @@ class Client:
         if search_criteria is None:
             search_criteria = {}
 
-            url = self.server_url + "/v1/area?access_token=" + \
+        url = self.server_url + "/v1/area?access_token=" + \
                   urllib.parse.quote(self.access_token)
 
         url += _generate_request_search_criteria(search_criteria.items())
@@ -652,7 +652,7 @@ class Client:
         if search_criteria is None:
             search_criteria = {}
 
-            url = self.server_url + "/v1/area/category?access_token=" + \
+        url = self.server_url + "/v1/area/category?access_token=" + \
                   urllib.parse.quote(self.access_token)
 
         url += _generate_request_search_criteria(search_criteria.items())
@@ -680,7 +680,7 @@ class Client:
         if search_criteria is None:
             search_criteria = {}
 
-            url = self.server_url + "/v1/area/information?access_token=" + \
+        url = self.server_url + "/v1/area/information?access_token=" + \
                   urllib.parse.quote(self.access_token)
 
         url += _generate_request_search_criteria(search_criteria.items())
@@ -708,7 +708,7 @@ class Client:
         if search_criteria is None:
             search_criteria = {}
 
-            url = self.server_url + "/v1/area/information/field?access_token=" + \
+        url = self.server_url + "/v1/area/information/field?access_token=" + \
                   urllib.parse.quote(self.access_token)
 
         url += _generate_request_search_criteria(search_criteria.items())
@@ -736,7 +736,7 @@ class Client:
         if search_criteria is None:
             search_criteria = {}
 
-            url = self.server_url + "/v1/area/information/tag?access_token=" + \
+        url = self.server_url + "/v1/area/information/tag?access_token=" + \
                   urllib.parse.quote(self.access_token)
 
         url += _generate_request_search_criteria(search_criteria.items())
@@ -764,7 +764,7 @@ class Client:
         if search_criteria is None:
             search_criteria = {}
 
-            url = self.server_url + "/v1/area/polygon?access_token=" + \
+        url = self.server_url + "/v1/area/polygon?access_token=" + \
                   urllib.parse.quote(self.access_token)
 
         url += _generate_request_search_criteria(search_criteria.items())
