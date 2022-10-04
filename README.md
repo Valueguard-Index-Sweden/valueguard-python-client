@@ -2,6 +2,9 @@
  
 # Valueguard Python Client
 
+## Super-Linter Status &#8595;  
+[![GitHub Super-Linter](https://github.com/Valueguard-Index-Sweden/Super-linter-test/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 ## Index
 
 - [Introduction](#introduction)
