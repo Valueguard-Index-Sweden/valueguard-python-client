@@ -1,0 +1,17 @@
+[sqlfluff]
+dialect = mysql
+
+rules = core
+
+# L006 - No need to check whitespace after =
+# L048 - No need to check whitespace before value
+
+exclude_rules = L006,L048
+
+[sqlfluff:rules:L016]
+
+# Line length
+
+ignore_comment_lines = True
+
+ignore_comment_clauses = True
