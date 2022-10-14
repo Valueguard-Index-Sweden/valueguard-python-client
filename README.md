@@ -1,9 +1,7 @@
  <img src="https://valueguard.se/static/media/valueguardlogo_black.f3a4c174.png" width="200">
- 
+
 # Valueguard Python Client
 
-## Super-Linter Status &#8595;  
-[![GitHub Super-Linter](https://github.com/Valueguard-Index-Sweden/Super-linter-test/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
 ## Index
 
@@ -52,7 +50,7 @@ vgClient = valueguard.Client()
 # Generate a access token
 vgClient.authenticate(<username>,<password>)
 
-# Use wished function 
+# Use wished function
 print(vgClient.residential_registry(offset=0, limit=800, search_criteria={
                                                             "construction_year_min": 2018,
                                                             "construction_year_max": 2019
