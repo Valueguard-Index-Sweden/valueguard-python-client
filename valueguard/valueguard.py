@@ -6,9 +6,28 @@ import urllib.parse
 def _generate_request_search_criteria(search_criteria):
     url = ""
     for key, value in search_criteria:
+        if key == "number":
+            value = _changeArrayToString(value)
         url += "&" + urllib.parse.quote(key) + "=" + urllib.parse.quote(str(value))
     return url
 
+def _changeArrayToString(self, stringarray):
+    """ Handles the check to see if the parameter is an array and then converts it to a string
+
+    Parameters
+    ----------
+    :param stringarray:
+        The possible string array we are going to convert to a string.
+
+    Returns
+    -------
+    :return:
+        A string. Either converted from an array or as it is.
+    """
+    if isinstance(stringarray, list):
+        parametersString = ','.join(stringarray)
+        return parametersString
+    return stringarray
 
 class Client:
     # Static
@@ -112,8 +131,7 @@ class Client:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
-            
-            
+
     def residential_registry(self, offset, limit, search_criteria=None):
         """ Handles the query to retrieve data from the residential registry.
 
