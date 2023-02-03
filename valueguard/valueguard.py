@@ -7,27 +7,28 @@ def _generate_request_search_criteria(search_criteria):
     url = ""
     for key, value in search_criteria:
         if key == "number":
-            value = _changeArrayToString(value)
+            value = 110
+        value = _change_array_to_string(value)
         url += "&" + urllib.parse.quote(key) + "=" + urllib.parse.quote(str(value))
     return url
 
-def _changeArrayToString(self, stringarray):
+def _change_array_to_string(self, value):
     """ Handles the check to see if the parameter is an array and then converts it to a string
 
     Parameters
     ----------
-    :param stringarray:
-        The possible string array we are going to convert to a string.
+    :param value:
+        The possible array or list we are going to convert to a string.
 
     Returns
     -------
     :return:
         A string. Either converted from an array or as it is.
     """
-    if isinstance(stringarray, list):
-        parametersString = ','.join(stringarray)
-        return parametersString
-    return stringarray
+    if isinstance(value, list):
+        parameters_string = ','.join(value)
+        return parameters_string
+    return value
 
 class Client:
     # Static
