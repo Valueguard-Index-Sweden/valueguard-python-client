@@ -3,14 +3,7 @@ import json
 import urllib.parse
 
 
-def _generate_request_search_criteria(search_criteria):
-    url = ""
-    for key, value in search_criteria:
-        if key == "number":
-            value = 110
-        value = _change_array_to_string(value)
-        url += "&" + urllib.parse.quote(key) + "=" + urllib.parse.quote(str(value))
-    return url
+
 
 def _change_array_to_string(self, value):
     """ Handles the check to see if the parameter is an array and then converts it to a string
