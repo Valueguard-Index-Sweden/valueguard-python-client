@@ -10,7 +10,7 @@ def _generate_request_search_criteria(search_criteria):
         url += "&" + urllib.parse.quote(key) + "=" + urllib.parse.quote(str(value))
     return url
 
-def _change_array_to_string(self, value):
+def _change_array_to_string(value):
     """ Handles the check to see if the parameter is an array and then converts it to a string
 
     Parameters
