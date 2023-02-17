@@ -21,8 +21,10 @@
 
 **Valueguard Python Client** is the official client used to interact with the new **Valueguards API**
 
-- For **python client** documentation see [usage](#usage) and [wiki-page](https://github.com/Valueguard-Index-Sweden/valueguard-python-client/wiki)
-- For the **core Valueguard API** documentation, see the [api documentation](https://api.valueguard.se/swagger-ui.html).
+Valueguard is a Swedish company that provides real estate valuation and analysis services for the housing market. The company was founded in 2007. Our primary service is to provide independent home valuations and analyses to banks, brokers and other companies that need reliable and accurate property information. Our services are based on various data sources, including historical transaction data, information about the property's location and condition, and other market data.
+
+In addition to price statistics and valuations, Valueguard provides various other services, such as a complete registry of all homes in Sweden, called the Residential Registry. We have a team of experienced analysts who work to provide high-quality services to our clients.
+We are proud to have a strong reputation in the Swedish real estate industry and are considered one of the country's leading providers of housing statistics.
 
 ## Installing
 
@@ -40,6 +42,9 @@ pip3 install valueguard
 
 
 # Usage
+
+- For **python client** documentation see [usage](#usage) and [wiki-page](https://github.com/Valueguard-Index-Sweden/valueguard-python-client/wiki)
+- For the **core Valueguard API** documentation, see the [api documentation](https://api.valueguard.se/swagger-ui.html).
 
 ```python
 import valueguard
