@@ -43,7 +43,7 @@ pip3 install valueguard
 
 # Usage
 
-- For **python client** documentation see [usage](#usage) and [wiki-page](https://github.com/Valueguard-Index-Sweden/valueguard-python-client/wiki)
+- For **python client** documentation see [wiki-page](https://github.com/Valueguard-Index-Sweden/valueguard-python-client/wiki)
 - For the **core Valueguard API** documentation, see the [api documentation](https://api.valueguard.se/swagger-ui.html).
 
 ```python
