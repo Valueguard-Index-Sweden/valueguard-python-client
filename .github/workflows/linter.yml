@@ -1,0 +1,10 @@
+on:
+  # Trigger linting at every pull_request. Action will also be visible from Pull Requests to master/main
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  mega-linter:
+    uses: Valueguard-Index-Sweden/vg-linting/.github/workflows/mega-linter.yml@master
+  super-linter:
+    uses: Valueguard-Index-Sweden/vg-linting/.github/workflows/super-linter.yml@master
