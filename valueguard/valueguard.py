@@ -625,7 +625,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
-    def areas(self, search_criteria=None):
+    def area(self, search_criteria=None):
         """ Handles the query to get the areas.
 
         Parameters
@@ -653,7 +653,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
-    def area_categories(self, search_criteria=None):
+    def area_category(self, search_criteria=None):
         """ Handles the query to get the area category.
 
         Parameters
@@ -709,7 +709,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
-    def area_information_fields(self, search_criteria=None):
+    def area_information_field(self, search_criteria=None):
         """ Handles the query to get the area information fields.
 
         Parameters
@@ -737,7 +737,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
-    def area_information_tags(self, search_criteria=None):
+    def area_information_tag(self, search_criteria=None):
         """ Handles the query to get the area information tags.
 
         Parameters
@@ -765,7 +765,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
-    def area_polygons(self, search_criteria=None):
+    def area_polygon(self, search_criteria=None):
         """ Handles the query to get the area polygons.
 
         Parameters
