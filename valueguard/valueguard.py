@@ -131,8 +131,8 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
-    def residential_home(self, search_criteria=None):
-        """ Handles the query to retrieve data from the residential home.
+    def residence(self, search_criteria=None):
+        """ Handles the query to retrieve data about residence
 
         Parameters
         ----------
@@ -146,7 +146,7 @@ class Client:
         """
         if search_criteria is None:
             search_criteria = {}
-        url = self.server_url + "/v1/residential/home?access_token=" + \
+        url = self.server_url + "/v1/residence?access_token=" + \
               urllib.parse.quote(self.access_token) 
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
@@ -157,8 +157,8 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
         
-    def residential_home_registration(self, search_criteria=None):
-        """ Handles the query to retrieve data from the residential home registration.
+    def residence_registration(self, search_criteria=None):
+        """ Handles the query to retrieve data about the residence registration.
 
         Parameters
         ----------
@@ -172,7 +172,7 @@ class Client:
         """
         if search_criteria is None:
             search_criteria = {}
-        url = self.server_url + "/v1/residential/home/registration?access_token=" + \
+        url = self.server_url + "/v1/residence/registration?access_token=" + \
               urllib.parse.quote(self.access_token) 
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
