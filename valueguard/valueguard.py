@@ -131,7 +131,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
-    def residential_home(self, offset, limit, search_criteria=None):
+    def residential_home(self, search_criteria=None):
         """ Handles the query to retrieve data from the residential home.
 
         Parameters
@@ -157,7 +157,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
         
-    def residential_home_registration(self, offset, limit, search_criteria=None):
+    def residential_home_registration(self, search_criteria=None):
         """ Handles the query to retrieve data from the residential home registration.
 
         Parameters
