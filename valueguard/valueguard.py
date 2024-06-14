@@ -677,7 +677,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
-    def index_volume(self, search_criteria=None, public=False):
+    def index_volume(self, search_criteria=None):
         """ Handles the query to get the index area volume.
 
         Parameters
