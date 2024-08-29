@@ -518,7 +518,7 @@ class Client:
         return response.content  
     
     def index_definitions(self, search_criteria=None):
-        """ Handles the query to get index normalized.
+        """ Handles the query to get index definitions.
 
         Parameters
         ----------
@@ -544,7 +544,7 @@ class Client:
         return json.loads(response.content.decode("utf-8"))
         
     def index_definitions_complete(self, search_criteria=None):
-        """ Handles the query to get index normalized complete.
+        """ Handles the query to get index definitions complete.
 
         Parameters
         ----------
