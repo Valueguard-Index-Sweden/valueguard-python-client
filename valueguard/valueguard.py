@@ -33,6 +33,7 @@ class Client:
     # server_url = "http://localhost:8080"
     server_url = "https://api.valueguard.se"
     __oauth2_client_name = "api"
+    _verify_ssl=True
 
     # User settings;
     access_token = ""
@@ -65,7 +66,7 @@ class Client:
               "&password=" + \
               urllib.parse.quote(password)
         # print(url)
-        response = requests.post(url)
+        response = requests.post(url, verify=self._verify_ssl)
 
         if response.status_code == 200:
             response_json = json.loads(response.content.decode("utf-8"))
@@ -84,12 +85,12 @@ class Client:
         url = self.server_url + "/oauth/token?client_id=api&grant_type=refresh_token&refresh_token=" + \
               urllib.parse.quote(self.refresh_token)
         print(url)
-        response = requests.post(url)
+        response = requests.post(url, verify=self._verify_ssl)
         if response.status_code == 200:
             response_json = json.loads(response.content.decode("utf-8"))
             self.access_token = response_json['access_token']
             self.refresh_token = response_json['refresh_token']
-            print(response_json)
+            #print(response_json)
         else:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -107,7 +108,7 @@ class Client:
               urllib.parse.quote(self.access_token)
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -125,7 +126,7 @@ class Client:
               urllib.parse.quote(self.access_token)
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -151,7 +152,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -177,7 +178,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -211,7 +212,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -245,7 +246,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -279,7 +280,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -313,7 +314,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -347,7 +348,7 @@ class Client:
          url += _generate_request_search_criteria(search_criteria.items())
          # print(url)
          session = requests.Session()
-         response = session.get(url)
+         response = session.get(url, verify=self._verify_ssl)
          if response.status_code != 200:
              # print(response.content.decode("utf-8"))
              raise Exception(response.content.decode("utf-8"))
@@ -381,7 +382,7 @@ class Client:
           url += _generate_request_search_criteria(search_criteria.items())
           # print(url)
           session = requests.Session()
-          response = session.get(url)
+          response = session.get(url, verify=self._verify_ssl)
           if response.status_code != 200:
               # print(response.content.decode("utf-8"))
               raise Exception(response.content.decode("utf-8"))
@@ -407,7 +408,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -433,7 +434,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -459,7 +460,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -485,7 +486,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -511,7 +512,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -537,7 +538,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -563,7 +564,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -589,7 +590,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -615,7 +616,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -641,7 +642,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -666,7 +667,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -697,7 +698,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -723,7 +724,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -751,7 +752,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -779,7 +780,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -807,7 +808,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -835,7 +836,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -863,7 +864,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -891,7 +892,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -919,7 +920,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
@@ -947,7 +948,7 @@ class Client:
         url += _generate_request_search_criteria(search_criteria.items())
         # print(url)
         session = requests.Session()
-        response = session.get(url)
+        response = session.get(url, verify=self._verify_ssl)
         if response.status_code != 200:
             # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
