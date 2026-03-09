@@ -415,7 +415,7 @@ class Client:
         return json.loads(response.content.decode("utf-8"))
 
     def sales_reference(self, search_criteria=None):
-        """ Handles the query to get sales from reference.
+        """Handles the query to get sales references.
 
         Parameters
         ----------
@@ -429,16 +429,27 @@ class Client:
         """
         if search_criteria is None:
             search_criteria = {}
+
         url = self.server_url + "/v1/sales/reference?access_token=" + \
               urllib.parse.quote(self.access_token)
-        url += _generate_request_search_criteria(search_criteria.items())
-        # print(url)
+
         session = requests.Session()
-        response = session.get(url, verify=self._verify_ssl)
+        headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+
+        response = session.post(
+            url,
+            verify=self._verify_ssl,
+            headers=headers,
+            json=search_criteria
+        )
+
         if response.status_code != 200:
-            # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
-        return json.loads(response.content.decode("utf-8"))
+
+        return response.json()
 
     def sales(self, search_criteria=None):
         """ Handles the query to get sales.
@@ -973,12 +984,445 @@ class Client:
 
         url = self.server_url + "/v1/sales/market-share?access_token=" + \
               urllib.parse.quote(self.access_token)
+
         session = requests.Session()
         headers = {
-          'Content-Type': 'application/json'
+            "Content-Type": "application/json",
+            "Accept": "application/json"
         }
-        response = session.post(url, verify=self._verify_ssl, headers=headers, data=json.dumps(search_criteria))
+
+        response = session.post(
+            url,
+            verify=self._verify_ssl,
+            headers=headers,
+            json=search_criteria
+        )
+
         if response.status_code != 200:
-            # print(response.content.decode("utf-8"))
             raise Exception(response.content.decode("utf-8"))
-        return json.loads(response.content.decode("utf-8"))
+
+        return response.json()
+
+    def ads_reference(self, search_criteria=None):
+        """Handles the query to get ads references.
+
+        Parameters
+        ----------
+        :param search_criteria:
+            Defines the search criteria used to filter the query.
+
+        Returns
+        -------
+        :return:
+            The query result in JSON format
+        """
+
+        if search_criteria is None:
+            search_criteria = {}
+
+        url = self.server_url + "/v1/ads/reference?access_token=" + \
+              urllib.parse.quote(self.access_token)
+
+        session = requests.Session()
+        headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+
+        response = session.post(
+            url,
+            verify=self._verify_ssl,
+            headers=headers,
+            json=search_criteria
+        )
+
+        if response.status_code != 200:
+            raise Exception(response.content.decode("utf-8"))
+
+        return response.json()
+
+    def ads_market_share(self, search_criteria=None):
+        """ Handles the query to get the ads market share.
+
+        Parameters
+        ----------
+        :param search_criteria:
+            Defines the search criteria used to filter the query.
+
+        Returns
+        -------
+        :return:
+            The query result in JSON format
+        """
+
+        if search_criteria is None:
+            search_criteria = {}
+
+        url = self.server_url + "/v1/ads/market-share?access_token=" + \
+              urllib.parse.quote(self.access_token)
+
+        session = requests.Session()
+        headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+
+        response = session.post(
+            url,
+            verify=self._verify_ssl,
+            headers=headers,
+            json=search_criteria
+        )
+
+        if response.status_code != 200:
+            raise Exception(response.content.decode("utf-8"))
+
+        return response.json()
+
+    def housing_association(self, org_number):
+        """Handles the query to get information about a housing association.
+
+        Parameters
+        ----------
+        :param org-nr:
+            Organization number used to filter the query.
+
+        Returns
+        -------
+        :return:
+            The query result in JSON format
+        """
+
+
+        url = (
+                self.server_url
+                + "/v1/housing-association/"
+                + urllib.parse.quote(org_number)
+                + "?access_token="
+                + urllib.parse.quote(self.access_token)
+        )
+
+        session = requests.Session()
+
+        response = session.get(
+            url,
+            verify=self._verify_ssl
+        )
+
+        if response.status_code != 200:
+            raise Exception(response.content.decode("utf-8"))
+
+        return response.json()
+
+    def housing_association_report(self, housing_association_id, year):
+        """Handles the query to get the annual report for a housing association.
+
+        Parameters
+        ----------
+        :param org-nr:
+            Organization number used to filter the query.
+        : param year
+            Year for the report
+
+        Returns
+        -------
+        :return:
+            The PDF file content as bytes.
+        """
+
+        url = (
+                self.server_url
+                + "/v1/housing-association/report"
+                + "?housing_association_id="
+                + urllib.parse.quote(str(housing_association_id))
+                + "&year="
+                + urllib.parse.quote(str(year))
+                + "&access_token="
+                + urllib.parse.quote(self.access_token)
+        )
+
+        session = requests.Session()
+
+        response = session.get(
+            url,
+            verify=self._verify_ssl
+        )
+
+        if response.status_code != 200:
+            raise Exception(response.content.decode("utf-8", errors="replace"))
+
+        return response.content
+
+    def geocode(self, query, limit=5, match_type="address", exact_match=False):
+        """Handles the query to geocode an address or place.
+
+        Parameters
+        ----------
+        query : str
+            The search string (e.g. street name, address).
+
+        limit : int, optional
+            Maximum number of results to return (default 5, max 10).
+
+        match_type : str, optional
+            Type of match to perform. Default is "address".
+
+        exact_match : bool, optional
+            Whether the match should be exact. Default False.
+
+        Returns
+        -------
+        dict
+            The API response returned as JSON containing geocode results.
+
+        """
+
+        url = (
+                self.server_url
+                + "/v1/geocode"
+                + "?access_token="
+                + urllib.parse.quote(self.access_token)
+                + "&query="
+                + urllib.parse.quote(query)
+                + "&limit="
+                + urllib.parse.quote(str(limit))
+                + "&match_type="
+                + urllib.parse.quote(match_type)
+                + "&exact_match="
+                + urllib.parse.quote(str(exact_match).lower())
+        )
+
+        session = requests.Session()
+
+        response = session.get(
+            url,
+            verify=self._verify_ssl
+        )
+
+        if response.status_code != 200:
+            raise Exception(response.content.decode("utf-8"))
+
+        return response.json()
+
+    def projects_new(self):
+        """Handles the query to fetch data required to create a new project.
+
+        Returns
+        -------
+        dict
+            The API response returned as JSON containing default project data.
+        """
+
+        url = (
+                self.server_url
+                + "/v1/projects/new"
+                + "?access_token="
+                + urllib.parse.quote(self.access_token)
+        )
+
+        session = requests.Session()
+
+        response = session.get(
+            url,
+            verify=self._verify_ssl
+        )
+
+        if response.status_code != 200:
+            raise Exception(response.content.decode("utf-8"))
+
+        return response.json()
+
+    def projects(self, limit=10):
+        """Handles the query to fetch projects for the authenticated user.
+
+        Parameters
+        ----------
+        limit : int, optional
+            Maximum number of projects to return.
+
+        Returns
+        -------
+        dict
+            The API response returned as JSON containing the projects.
+
+        """
+
+        url = (
+                self.server_url
+                + "/v1/projects"
+                + "?access_token="
+                + urllib.parse.quote(self.access_token)
+                + "&limit="
+                + urllib.parse.quote(str(limit))
+        )
+
+        session = requests.Session()
+
+        response = session.get(
+            url,
+            verify=self._verify_ssl
+        )
+
+        if response.status_code != 200:
+            raise Exception(response.content.decode("utf-8"))
+
+        return response.json()
+
+
+    def project(self, project_id):
+        """Handles the query to fetch a specific project.
+
+        Parameters
+        ----------
+        project_id : str
+            The UUID of the project.
+
+        Returns
+        -------
+        dict
+            The API response returned as JSON containing the project data.
+
+        """
+
+        url = (
+                self.server_url
+                + "/v1/projects/"
+                + urllib.parse.quote(str(project_id))
+                + "?access_token="
+                + urllib.parse.quote(self.access_token)
+        )
+
+        session = requests.Session()
+
+        response = session.get(
+            url,
+            verify=self._verify_ssl
+        )
+
+        if response.status_code != 200:
+            raise Exception(response.content.decode("utf-8"))
+
+        return response.json()
+
+    def create_project(self, project_data):
+        """Handles the request to create a new project.
+
+        Parameters
+        ----------
+        project_data : dict
+            Dictionary containing the full project configuration
+            including search criteria and selected fields.
+
+        Returns
+        -------
+        dict
+            The API response returned as JSON containing the created project.
+
+        """
+
+        url = (
+                self.server_url
+                + "/v1/projects"
+                + "?access_token="
+                + urllib.parse.quote(self.access_token)
+        )
+
+        session = requests.Session()
+
+        headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+
+        response = session.post(
+            url,
+            verify=self._verify_ssl,
+            headers=headers,
+            json=project_data
+        )
+
+        if response.status_code != 200:
+            raise Exception(response.content.decode("utf-8"))
+
+        return response.json()
+
+    def delete_project(self, project_id):
+        """Handles the request to delete a project.
+
+        Parameters
+        ----------
+        project_id : str
+            The UUID of the project to delete.
+
+        Returns
+        -------
+        dict
+            The API response returned as JSON.
+
+        """
+
+        url = (
+                self.server_url
+                + "/v1/projects/"
+                + urllib.parse.quote(str(project_id))
+                + "?access_token="
+                + urllib.parse.quote(self.access_token)
+        )
+
+        session = requests.Session()
+
+        response = session.delete(
+            url,
+            verify=self._verify_ssl
+        )
+
+        if response.status_code != 200:
+            raise Exception(response.content.decode("utf-8"))
+
+        return response.json()
+
+    def update_project_name(self, project_id, name):
+        """Handles the request to update the name of a project.
+
+        Parameters
+        ----------
+        project_id : str
+            The UUID of the project.
+
+        name : str
+            The new name for the project.
+
+        Returns
+        -------
+        dict
+            The API response returned as JSON.
+
+        """
+
+        url = (
+                self.server_url
+                + "/v1/projects/"
+                + urllib.parse.quote(str(project_id))
+                + "/name"
+                + "?access_token="
+                + urllib.parse.quote(self.access_token)
+        )
+
+        session = requests.Session()
+
+        headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+
+        response = session.post(
+            url,
+            verify=self._verify_ssl,
+            headers=headers,
+            json={"name": name}
+        )
+
+        if response.status_code != 200:
+            raise Exception(response.content.decode("utf-8"))
+
+        return response.json()
