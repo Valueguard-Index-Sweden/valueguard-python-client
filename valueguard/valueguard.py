@@ -184,7 +184,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))    
         
-    def residential_registry(self, offset, limit, search_criteria=None):
+    def residential_registry(self, offset, limit, search_criteria=None, version="v1"):
         """ Handles the query to retrieve data from the residential registry.
 
         Uses offset and limit to break down the results of the query into chunks.
@@ -197,6 +197,8 @@ class Client:
             Defines the amount of data objects retrieved with each query.
         :param search_criteria:
             Defines the search criteria used to filter the query.
+        :param version:
+            The version of the endpoint, "v1" (default) or "v2".
 
         Returns
         -------
@@ -205,7 +207,7 @@ class Client:
         """
         if search_criteria is None:
             search_criteria = {}
-        url = self.server_url + "/v1/residential/registry?access_token=" + \
+        url = self.server_url + "/" + version + "/residential/registry?access_token=" + \
               urllib.parse.quote(self.access_token) + \
               "&offset=" + urllib.parse.quote(str(offset)) + \
               "&limit=" + urllib.parse.quote(str(limit))
@@ -218,7 +220,7 @@ class Client:
             raise Exception(response.content.decode("utf-8"))
         return json.loads(response.content.decode("utf-8"))
 
-    def residential_registry_markups(self, offset, limit, search_criteria=None):
+    def residential_registry_markups(self, offset, limit, search_criteria=None, version="v1"):
         """ Handles the query to retrieve data from the residential registry markups.
 
         Uses offset and limit to break down the results of the query into chunks.
@@ -231,6 +233,8 @@ class Client:
             Defines the amount of data objects retrieved with each query.
         :param search_criteria:
             Defines the search criteria used to filter the query.
+        :param version:
+            The version of the endpoint, "v1" (default) or "v2".
 
         Returns
         -------
@@ -239,7 +243,7 @@ class Client:
         """
         if search_criteria is None:
             search_criteria = {}
-        url = self.server_url + "/v1/residential/registry/markups?access_token=" + \
+        url = self.server_url + "/" + version + "/residential/registry/markups?access_token=" + \
               urllib.parse.quote(self.access_token) + \
               "&offset=" + urllib.parse.quote(str(offset)) + \
               "&limit=" + urllib.parse.quote(str(limit))
